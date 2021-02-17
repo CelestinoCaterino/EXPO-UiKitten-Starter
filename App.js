@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ApplicationProvider, IconRegistry, Layout, Text, TopNavigation } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import * as eva from '@eva-design/eva';
+import { TopNav } from './components/TopNav';
+import { BottomNav } from './components/BottomNav';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import { SafeAreaView, View , StatusBar} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { HomePage } from './screens/HomePage.js';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+export default () => (
+  <React.Fragment>
+    <IconRegistry icons={EvaIconsPack} />
+    <ApplicationProvider {...eva} theme={{ ...eva.light/* , ...myTheme  */}}>
+    <SafeAreaView style={{ flex: 1,         marginTop:StatusBar.currentHeight}}>
+      <TopNav/>
+
+      <Layout style={{ flex: 1}}>
+        <HomePage></HomePage>
+      </Layout>
+      <BottomNav/>
+    </SafeAreaView>
+      
+    </ApplicationProvider>
+  </React.Fragment>
+);
